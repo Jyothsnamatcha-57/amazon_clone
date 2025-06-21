@@ -223,4 +223,13 @@ footer{
    background: #131921;
    padding: 20px 60px;
 }
+/* Hide horizontal scrollbar for product sliders */
+.Products, .products {
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE and Edge */
+}
+.Products::-webkit-scrollbar,
+.products::-webkit-scrollbar {
+    display: none;                /* Chrome, Safari, Opera */
+}
  

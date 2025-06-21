@@ -20,7 +20,7 @@ prev_btn.addEventListener('click',(e)=>{
    changeSlide();
 })
 next_btn.addEventListener('click',(e)=>{
-   if(imgs.length-10){
+   if(n<imgs.length-1){
       n++;
    }
    else{
@@ -35,3 +35,31 @@ for(const item of scrollContainer){
       item.scrollLeft+=evt.deltaY;
    })
 }
+// Drag-to-scroll for product sliders
+document.querySelectorAll('.Products, .products').forEach(container => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        container.classList.add('active');
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+    });
+    container.addEventListener('mouseleave', () => {
+        isDown = false;
+        container.classList.remove('active');
+    });
+    container.addEventListener('mouseup', () => {
+        isDown = false;
+        container.classList.remove('active');
+    });
+    container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2; // scroll-fast
+        container.scrollLeft = scrollLeft - walk;
+    });
+});
